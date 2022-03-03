@@ -1,11 +1,11 @@
-import React from 'react';
+import AddColorForm from "./components/AddColorForm";
 
 function App() {
   return (
     <div>
-      frontend task
+      <AddColorForm />
     </div>
   );
-}
+};
 
 export default App;
