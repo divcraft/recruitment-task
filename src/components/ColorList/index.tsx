@@ -5,7 +5,7 @@ import "./style.scss";
 const ColorList: FC = () => {
 
    const {colorList} = useContext(ColorListContext); 
-   
+
    const orderedList = colorList
       .sort((a, b) => b.rgb.blue - a.rgb.blue)
       .sort((a, b) => b.rgb.green - a.rgb.green)

@@ -16,7 +16,7 @@ export const getSaturation = (hexValue: string) => {
 
    lightness = (maxChannel + minChannel) / 2;
    saturation = delta === 0 ? 0 : delta / (1 - Math.abs(2 * lightness - 1));
-   saturation = +(saturation * 100).toFixed(1);
+   saturation = +saturation.toFixed(2);
 
    return saturation;
 };

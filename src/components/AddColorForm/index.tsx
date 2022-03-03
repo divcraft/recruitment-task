@@ -1,6 +1,7 @@
 import {FC, FormEvent, ChangeEvent, useState, useContext} from 'react';
 import {ColorListContext} from '../../globalState';
-import { getSaturation, hexToRgb } from '../../utilities/hexToRgb';
+import {getSaturation} from '../../utilities/getSaturation';
+import {hexToRgb} from '../../utilities/hexToRgb';
 
 type validationType = {
    isValidated: boolean,
