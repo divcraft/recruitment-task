@@ -1,0 +1,26 @@
+body {
+   font-family: sans-serif;
+}
+
+.listContainer {
+   display: flex;
+   list-style: none;
+};
+
+.colorContainer {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   padding: 10px;
+};
+
+.colorRectangle {
+   width: 30px;
+   height: 30px;
+   background-color: var(--color);
+};
+
+.validationText {
+   color: red;
+   padding: 5px 0;
+}

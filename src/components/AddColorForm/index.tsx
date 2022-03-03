@@ -1,4 +1,5 @@
-import {FC, FormEvent, ChangeEvent, useState} from 'react';
+import {FC, FormEvent, ChangeEvent, useState, useContext} from 'react';
+import {ColorListContext} from '../../globalState';
 
 type validationType = {
    isValidated: boolean,
@@ -7,12 +8,11 @@ type validationType = {
 
 const AddColorForm: FC = () => {
 
-   const [colorList, setColorList] = useState<string[]>([]);
+   const {colorList, setColorList} = useContext(ColorListContext);
    const [inputValue, setInputValue] = useState('');
    const [validationMessage, setValidationMessage] = useState('');
 
    const validateInput = (value: string): validationType => {
-      console.log(value);
       if (value.length > 7) {
          return {
             isValidated: false,
@@ -31,11 +31,11 @@ const AddColorForm: FC = () => {
          };
       };
       for (let i = 1; i < value.length; i++) {
-         const regex = value[i].match(/[a-z0-9]/i);
+         const regex = value[i].match(/[a-f0-9]/i);
          if (!regex) {
             return {
                isValidated: false,
-               message: 'Use only letters or numbers.',
+               message: 'Use only signs valid for hexadecimal RGB code (A-F, 0-9).',
             };
          };
       };
@@ -76,14 +76,11 @@ const AddColorForm: FC = () => {
                Add color
             </button>
             {validationMessage && 
-               <div style={{color: 'red'}}>{validationMessage}</div>
+               <div className='validationText'>
+                  {validationMessage}
+               </div>
             }
          </form>
-         {colorList.length > 0 && colorList.map(color => (
-            <ul key={color}>
-               <li>{color}</li>
-            </ul>
-         ))}
       </div>
    );
 };

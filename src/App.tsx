@@ -1,10 +1,13 @@
+import {ContextProvider} from './globalState';
 import AddColorForm from "./components/AddColorForm";
+import ColorList from "./components/ColorList";
 
 function App() {
   return (
-    <div>
+    <ContextProvider>
       <AddColorForm />
-    </div>
+      <ColorList />
+    </ContextProvider>
   );
 };
 
