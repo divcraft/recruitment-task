@@ -1,17 +1,12 @@
 import {CSSProperties, FC, useContext} from 'react';
 import {ColorListContext} from '../../globalState';
-import { hexToRgb } from '../../utilities/hexToRgb';
 import "./style.scss";
 
 const ColorList: FC = () => {
 
-   let {colorList} = useContext(ColorListContext); 
-   const rgbList = colorList.map(color => ({
-         rgb: hexToRgb(color),
-         hex: color,
-      }));
-
-   const orderedList = rgbList
+   const {colorList} = useContext(ColorListContext); 
+   
+   const orderedList = colorList
       .sort((a, b) => b.rgb.blue - a.rgb.blue)
       .sort((a, b) => b.rgb.green - a.rgb.green)
       .sort((a, b) => b.rgb.red - a.rgb.red);

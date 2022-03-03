@@ -1,5 +1,6 @@
 import {FC, FormEvent, ChangeEvent, useState, useContext} from 'react';
 import {ColorListContext} from '../../globalState';
+import { getSaturation, hexToRgb } from '../../utilities/hexToRgb';
 
 type validationType = {
    isValidated: boolean,
@@ -54,7 +55,11 @@ const AddColorForm: FC = () => {
 
    const handleSubmit = (e: FormEvent) => {
       e.preventDefault();
-      setColorList([...colorList, inputValue]);
+      setColorList([...colorList, {
+         hex: inputValue,
+         rgb: hexToRgb(inputValue),
+         saturation: getSaturation(inputValue),
+      }]);
       setInputValue('');
       validationMessage && setValidationMessage('');
    };
