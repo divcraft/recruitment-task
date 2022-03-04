@@ -1,17 +1,8 @@
 import {useContext} from "react";
-import {FilterContext} from "../globalState";
+import {FilterContext} from "../state/Filter.context";
+import { ColorListType } from "../types/ColorList.type";
 
-type colorListType = {
-   hex: string,
-   rgb: {
-      red: number,
-      green: number,
-      blue: number,
-   },
-   saturation: number,
-}[]
-
-export const useFilter = (colorList: colorListType) => {
+export const useFilter = (colorList: ColorListType) => {
    
    const {filter} = useContext(FilterContext);
    let filteredList = colorList;
@@ -32,8 +23,7 @@ export const useFilter = (colorList: colorListType) => {
             filteredList = filteredList.filter(color => color.saturation > 0.5);
          };
       };
-   })
+   });
    
-   filteredList.forEach(({rgb, saturation}) => console.log(rgb.red, rgb.green, rgb.blue, saturation));
    return filteredList;
-}
+};

@@ -1,12 +1,8 @@
 import {FC, FormEvent, ChangeEvent, useState, useContext} from 'react';
-import {ColorListContext} from '../../globalState';
+import {ColorListContext} from '../../state/ColorList.context';
 import {getSaturation} from '../../utilities/getSaturation';
 import {hexToRgb} from '../../utilities/hexToRgb';
-
-type validationType = {
-   isValidated: boolean,
-   message?: string,
-}
+import { ValidationType } from '../../types/Validation.type';
 
 const AddColorForm: FC = () => {
 
@@ -14,7 +10,7 @@ const AddColorForm: FC = () => {
    const [inputValue, setInputValue] = useState('');
    const [validationMessage, setValidationMessage] = useState('');
 
-   const validateInput = (value: string): validationType => {
+   const validateInput = (value: string): ValidationType => {
       if (value.length > 7) {
          return {
             isValidated: false,

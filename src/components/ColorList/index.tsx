@@ -1,6 +1,6 @@
 import {CSSProperties, FC, useContext} from 'react';
-import {ColorListContext} from '../../globalState';
-import { useFilter } from '../../utilities/useFilter';
+import {ColorListContext} from '../../state/ColorList.context';
+import { useFilter } from '../../hooks/useFilter';
 import "./style.scss";
 
 const ColorList: FC = () => {

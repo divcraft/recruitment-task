@@ -1,5 +1,5 @@
 import {FC, useContext} from 'react';
-import {FilterContext} from '../../globalState';
+import {FilterContext} from '../../state/Filter.context';
 
 const FilterColorForm: FC = () => {
 

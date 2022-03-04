@@ -1,4 +1,4 @@
-import {ContextProvider} from './globalState';
+import {ContextProvider} from './state';
 import AddColorForm from "./components/AddColorForm";
 import ColorList from "./components/ColorList";
 import FilterColorForm from './components/FilterColorForm';
