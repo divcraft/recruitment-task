@@ -1,8 +1,8 @@
 import {FC, useContext} from 'react';
 import {FilterContext} from '../../state/Filter.context';
+import './style.scss';
 
 const FilterColorForm: FC = () => {
-
    const {filter, setFilter} = useContext(FilterContext);
 
    const handleCheckbox = (filterName: string) => {
@@ -16,23 +16,30 @@ const FilterColorForm: FC = () => {
             return filterItem;
          };
       })
-
       setFilter(newFilter);
    };
 
    return (
-      <div>
-         <form>
+      <div className='filterFormContainer'>
+         <h2 className='subtitle'>Filter options:</h2>
+         <form className='filterForm'>
                {filter.map(({name, isFlitered}) => (
-                  <div key={name}>
+                  <div 
+                     className='checkboxContainer' 
+                     key={name}
+                  >
                      <input 
+                        className='checkboxInput'
                         type="checkbox" 
                         name="filter-color" 
                         id={`filter-${name}`}
                         checked={isFlitered}
                         onChange={() => handleCheckbox(name)}
                      />
-                     <label htmlFor={`filter-${name}`} >
+                     <label
+                        className='checkboxLabel' 
+                        htmlFor={`filter-${name}`} 
+                     >
                         {`${name} > 50%`}
                      </label>
                   </div>

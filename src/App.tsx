@@ -2,13 +2,16 @@ import {ContextProvider} from './state';
 import AddColorForm from "./components/AddColorForm";
 import ColorList from "./components/ColorList";
 import FilterColorForm from './components/FilterColorForm';
+import './style/global.scss';
 
 function App() {
   return (
     <ContextProvider>
-      <AddColorForm />
-      <FilterColorForm/>
-      <ColorList />
+      <div className='wrapper'>
+        <AddColorForm />
+        <FilterColorForm/>
+        <ColorList />
+      </div>
     </ContextProvider>
   );
 };

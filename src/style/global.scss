@@ -1,0 +1,21 @@
+body {
+   font-family: sans-serif;
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+
+   button {
+      padding: 0;
+      margin: 0;
+      display: block;
+      border: none;
+      background: none;
+      cursor: pointer;
+   }
+
+   .wrapper {
+      margin: 0 auto;
+      width: 90%;
+      max-width: 1200px;
+   }
+}

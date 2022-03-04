@@ -4,6 +4,7 @@ import {getSaturation} from '../../utilities/getSaturation';
 import {hexToRgb} from '../../utilities/hexToRgb';
 import { ValidationType } from '../../types/Validation.type';
 import { updateStoragedColors } from '../../utilities/updateStoragedColors';
+import './style.scss';
 
 const AddColorForm: FC = () => {
 
@@ -67,26 +68,29 @@ const AddColorForm: FC = () => {
    };
 
    return (
-      <div>
-         <form>
+      <div className='addColorFormContainer'>
+         <h1 className='title'>Color palette</h1>
+         <form className='addColorForm'>
             <input 
+               className='inputColor'
                type="text" 
                onChange={e => handleInput(e)}
                value={inputValue}
                placeholder="#000000"
             />
-            <button 
+            <button
+               className='addColorButon'
                type='submit'
                onClick={e => handleSubmit(e)}
                disabled={!(inputValue.length === 7)}
             >
                Add color
             </button>
-            {validationMessage && 
+            {validationMessage && (
                <div className='validationText'>
                   {validationMessage}
                </div>
-            }
+            )}
          </form>
       </div>
    );

@@ -1,8 +1,8 @@
 import {CSSProperties, FC, useContext} from 'react';
 import {ColorListContext} from '../../state/ColorList.context';
 import { useFilter } from '../../hooks/useFilter';
-import "./style.scss";
 import { updateStoragedColors } from '../../utilities/updateStoragedColors';
+import './style.scss';
 
 const ColorList: FC = () => {
 
@@ -26,32 +26,30 @@ const ColorList: FC = () => {
    };
       
    return (
-      <div>
+      <>
          {colorList.length > 0 && 
             <ul className='listContainer'>
                {orderedList.map(color => {
                   const hexRBG = { "--color": color.hex } as CSSProperties;
                   return (
                      <li key={color.id} className='colorContainer'>
+                        <div 
+                           style={hexRBG} 
+                           className='colorRectangle'
+                           />
+                        <p className='colorLabel'>{color.hex}</p>
                         {!color.isPredefined && (
                            <button 
                               onClick={() => handleRemoveColor(color.id)}
                               type='button'
                               className='removeButton'
-                           >
-                              X
-                           </button>
+                           />
                         )}
-                        <div 
-                           style={hexRBG} 
-                           className='colorRectangle'
-                        />
-                        <p className='colorLabel'>{color.hex}</p>
                      </li>)
                   })}
             </ul>
          }
-      </div>
+      </>
    );
 };
 
