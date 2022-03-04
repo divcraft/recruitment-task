@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 import { ColorListType } from '../types/ColorList.type';
 import { ContextType } from '../types/Context.type';
 
-const initValue: ColorListType = [
+const storedColors = localStorage.getItem('colorList');
+const parsedColors: ColorListType | null = storedColors ? JSON.parse(storedColors) : null;
+
+const predefinedColors: ColorListType = [
    {
       id: 0,
       isPredefined: true,
@@ -70,6 +73,8 @@ const initValue: ColorListType = [
       saturation: 1,
    },
 ];
+
+const initValue = parsedColors ? [...predefinedColors, ...parsedColors] : predefinedColors;
 
 export const ColorListContext = React.createContext({
    colorList: [] as ColorListType,

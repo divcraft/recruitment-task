@@ -2,6 +2,7 @@ import {CSSProperties, FC, useContext} from 'react';
 import {ColorListContext} from '../../state/ColorList.context';
 import { useFilter } from '../../hooks/useFilter';
 import "./style.scss";
+import { updateStoragedColors } from '../../utilities/updateStoragedColors';
 
 const ColorList: FC = () => {
 
@@ -20,6 +21,7 @@ const ColorList: FC = () => {
          ...color,
          id: index,
       }));
+      updateStoragedColors(updatedList);
       setColorList(updatedList);
    };
       

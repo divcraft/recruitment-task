@@ -3,6 +3,7 @@ import {ColorListContext} from '../../state/ColorList.context';
 import {getSaturation} from '../../utilities/getSaturation';
 import {hexToRgb} from '../../utilities/hexToRgb';
 import { ValidationType } from '../../types/Validation.type';
+import { updateStoragedColors } from '../../utilities/updateStoragedColors';
 
 const AddColorForm: FC = () => {
 
@@ -52,13 +53,15 @@ const AddColorForm: FC = () => {
 
    const handleSubmit = (e: FormEvent) => {
       e.preventDefault();
-      setColorList([...colorList, {
+      const updatedColorList = [...colorList, {
          id: colorList.length,
          isPredefined: false,
          hex: inputValue,
          rgb: hexToRgb(inputValue),
          saturation: getSaturation(inputValue),
-      }]);
+      }]
+      updateStoragedColors(updatedColorList);
+      setColorList(updatedColorList);
       setInputValue('');
       validationMessage && setValidationMessage('');
    };
