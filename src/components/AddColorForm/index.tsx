@@ -1,99 +1,78 @@
-import {FC, FormEvent, ChangeEvent, useState, useContext} from 'react';
+import {FormEvent, ChangeEvent, Component} from 'react';
 import {ColorListContext} from '../../state/ColorList.context';
 import {getSaturation} from '../../utilities/getSaturation';
 import {hexToRgb} from '../../utilities/hexToRgb';
-import { ValidationType } from '../../types/Validation.type';
 import { updateStoragedColors } from '../../utilities/updateStoragedColors';
+import { validateInput } from '../../utilities/validateInput';
+import { ColorListType } from '../../types/ColorList.type';
 import './style.scss';
 
-const AddColorForm: FC = () => {
+class AddColorForm extends Component {
 
-   const {colorList, setColorList} = useContext(ColorListContext);
-   const [inputValue, setInputValue] = useState('');
-   const [validationMessage, setValidationMessage] = useState('');
-
-   const validateInput = (value: string): ValidationType => {
-      if (value.length > 7) {
-         return {
-            isValidated: false,
-         };
-      };
-      if (!inputValue && value[0] !== '#') {
-         return {
-            isValidated: false,
-            message: 'Please type "#" sign first.',
-         };
-      };
-      if (inputValue.length > 1 && value[0] !== '#') {
-         return {
-            isValidated: false,
-            message: `The "#" sign can't be removed.`,
-         };
-      };
-      for (let i = 1; i < value.length; i++) {
-         const regex = value[i].match(/[a-f0-9]/i);
-         if (!regex) {
-            return {
-               isValidated: false,
-               message: 'Use only signs valid for hexadecimal RGB code (A-F, 0-9).',
-            };
-         };
-      };
-      return {
-         isValidated: true,
-      };
+   state = {
+      inputValue: '',
+      validationMessage: '',
    };
 
-   const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
+   handleInput = (e: ChangeEvent<HTMLInputElement>) => {
       const {value} = e.target;
-      const validation = validateInput(value);
-      const {isValidated, message} = validation;
-      isValidated && setInputValue(value.toUpperCase());
-      setValidationMessage(message ? message : '');
+      const {isValidated, message} = validateInput(value, this.state.inputValue);
+      isValidated && this.setState({inputValue: value.toUpperCase()});
+      this.setState({validationMessage: message ? message : ''});
    };
 
-   const handleSubmit = (e: FormEvent) => {
+   handleSubmit = (
+      e: FormEvent, 
+      colorList: ColorListType, 
+      setColorList: (colorList: ColorListType) => {}
+   ) => {
       e.preventDefault();
       const updatedColorList = [...colorList, {
          id: colorList.length,
          isPredefined: false,
-         hex: inputValue,
-         rgb: hexToRgb(inputValue),
-         saturation: getSaturation(inputValue),
-      }]
+         hex: this.state.inputValue,
+         rgb: hexToRgb(this.state.inputValue),
+         saturation: getSaturation(this.state.inputValue),
+      }];
       updateStoragedColors(updatedColorList);
       setColorList(updatedColorList);
-      setInputValue('');
-      validationMessage && setValidationMessage('');
+      this.setState({inputValue: ''});
+      this.state.validationMessage && this.setState({validationMessage: ''});
    };
 
-   return (
-      <div className='addColorFormContainer'>
-         <h1 className='title'>Color palette</h1>
-         <form className='addColorForm'>
-            <input 
-               className='inputColor'
-               type="text" 
-               onChange={e => handleInput(e)}
-               value={inputValue}
-               placeholder="#000000"
-            />
-            <button
-               className='addColorButon'
-               type='submit'
-               onClick={e => handleSubmit(e)}
-               disabled={!(inputValue.length === 7)}
-            >
-               Add color
-            </button>
-            {validationMessage && (
-               <div className='validationText'>
-                  {validationMessage}
-               </div>
-            )}
-         </form>
-      </div>
-   );
+   render() {
+      const {inputValue, validationMessage} = this.state;
+      const {colorList, setColorList} = this.context;
+      return (
+         <div className='addColorFormContainer'>
+            <h1 className='title'>Color palette</h1>
+            <form className='addColorForm'>
+               <input 
+                  className='inputColor'
+                  type="text" 
+                  onChange={e => this.handleInput(e)}
+                  value={inputValue}
+                  placeholder="#000000"
+               />
+               <button
+                  className='addColorButon'
+                  type='submit'
+                  onClick={e => this.handleSubmit(e, colorList, setColorList)}
+                  disabled={!(inputValue.length === 7)}
+               >
+                  Add color
+               </button>
+               {validationMessage && (
+                  <div className='validationText'>
+                     {validationMessage}
+                  </div>
+               )}
+            </form>
+         </div>
+      );
+   }
 };
+
+AddColorForm.contextType = ColorListContext;
 
 export default AddColorForm;
