@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-import { ColorListType } from '../types/ColorList.type';
-import { ContextType } from '../types/Context.type';
+import { useState, createContext } from 'react';
+import { ContextType, ColorListType } from '../types';
 
 const storedColors = localStorage.getItem('colorList');
 const parsedColors: ColorListType | null = storedColors ? JSON.parse(storedColors) : null;
@@ -76,7 +75,7 @@ const predefinedColors: ColorListType = [
 
 const initValue = parsedColors ? [...predefinedColors, ...parsedColors] : predefinedColors;
 
-export const ColorListContext = React.createContext({
+export const ColorListContext = createContext({
    colorList: [] as ColorListType,
    setColorList: (colorList: ColorListType) => {},
 });

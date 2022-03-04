@@ -1,4 +1,4 @@
-import { ColorListType } from "../types/ColorList.type"
+import { ColorListType } from '../types/ColorList.type';
 
 export const updateStoragedColors = (colorList: ColorListType) => {
    const storagedColors = colorList.filter(color => !color.isPredefined);

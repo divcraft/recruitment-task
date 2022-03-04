@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-import { FilterType } from '../types/Filter.type';
-import { ContextType } from '../types/Context.type';
+import { useState, createContext } from 'react';
+import { ContextType, FilterType } from '../types';
 
 const initValue = [
    {
@@ -21,7 +20,7 @@ const initValue = [
    },
 ];
 
-export const FilterContext = React.createContext({
+export const FilterContext = createContext({
    filter: initValue,
    setFilter: (filter: FilterType) => {},
 });

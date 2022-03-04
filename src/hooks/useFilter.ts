@@ -1,6 +1,6 @@
-import {useContext} from "react";
-import {FilterContext} from "../state/Filter.context";
-import { ColorListType } from "../types/ColorList.type";
+import { useContext } from 'react';
+import { FilterContext } from '../state';
+import { ColorListType } from '../types';
 
 export const useFilter = (colorList: ColorListType) => {
    

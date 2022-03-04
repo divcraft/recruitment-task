@@ -1,13 +1,14 @@
-import {CSSProperties, FC, useContext} from 'react';
-import {ColorListContext} from '../../state/ColorList.context';
-import { useFilter } from '../../hooks/useFilter';
-import { updateStoragedColors } from '../../utilities/updateStoragedColors';
+import { useContext, CSSProperties } from 'react';
+import { ColorListContext } from '../../state/';
+import { useFilter } from '../../hooks';
+import { updateStoragedColors } from '../../utilities';
 import './style.scss';
 
-const ColorList: FC = () => {
+export const ColorList = () => {
 
    const {colorList, setColorList} = useContext(ColorListContext); 
    const filteredList = useFilter(colorList);
+
    const orderedList = filteredList
       .slice(0) 
       .sort((a, b) => b.rgb.blue - a.rgb.blue)
@@ -52,5 +53,3 @@ const ColorList: FC = () => {
       </>
    );
 };
-
-export default ColorList;

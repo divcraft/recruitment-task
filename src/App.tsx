@@ -1,10 +1,8 @@
-import {ContextProvider} from './state';
-import AddColorForm from "./components/AddColorForm";
-import ColorList from "./components/ColorList";
-import FilterColorForm from './components/FilterColorForm';
+import { AddColorForm, ColorList, FilterColorForm } from './components';
+import { ContextProvider } from './state';
 import './style/global.scss';
 
-function App() {
+const App = () => {
   return (
     <ContextProvider>
       <div className='wrapper'>

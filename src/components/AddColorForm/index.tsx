@@ -1,13 +1,15 @@
-import {FormEvent, ChangeEvent, Component} from 'react';
-import {ColorListContext} from '../../state/ColorList.context';
-import {getSaturation} from '../../utilities/getSaturation';
-import {hexToRgb} from '../../utilities/hexToRgb';
-import { updateStoragedColors } from '../../utilities/updateStoragedColors';
-import { validateInput } from '../../utilities/validateInput';
-import { ColorListType } from '../../types/ColorList.type';
+import { Component, FormEvent, ChangeEvent } from 'react';
+import { ColorListContext } from '../../state';
+import {
+   getSaturation,
+   hexToRgb,
+   updateStoragedColors,
+   validateInput
+} from '../../utilities';
+import { ColorListType } from '../../types';
 import './style.scss';
 
-class AddColorForm extends Component {
+export class AddColorForm extends Component {
 
    state = {
       inputValue: '',
@@ -74,5 +76,3 @@ class AddColorForm extends Component {
 };
 
 AddColorForm.contextType = ColorListContext;
-
-export default AddColorForm;

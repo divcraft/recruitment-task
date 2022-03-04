@@ -1,4 +1,4 @@
-import { ValidationType } from "../types/Validation.type";
+import { ValidationType } from '../types/Validation.type';
 
 export const validateInput = (value: string, inputValue: string): ValidationType => {
    if (value.length > 7) {

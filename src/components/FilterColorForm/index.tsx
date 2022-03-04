@@ -1,8 +1,9 @@
-import {FC, useContext} from 'react';
-import {FilterContext} from '../../state/Filter.context';
+import { useContext } from 'react';
+import { FilterContext } from '../../state';
 import './style.scss';
 
-const FilterColorForm: FC = () => {
+export const FilterColorForm = () => {
+   
    const {filter, setFilter} = useContext(FilterContext);
 
    const handleCheckbox = (filterName: string) => {
@@ -48,5 +49,3 @@ const FilterColorForm: FC = () => {
       </div>
    );
 };
-
-export default FilterColorForm;
