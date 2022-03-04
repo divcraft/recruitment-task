@@ -53,6 +53,8 @@ const AddColorForm: FC = () => {
    const handleSubmit = (e: FormEvent) => {
       e.preventDefault();
       setColorList([...colorList, {
+         id: colorList.length,
+         isPredefined: false,
          hex: inputValue,
          rgb: hexToRgb(inputValue),
          saturation: getSaturation(inputValue),

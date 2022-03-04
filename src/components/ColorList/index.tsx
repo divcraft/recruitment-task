@@ -5,12 +5,23 @@ import "./style.scss";
 
 const ColorList: FC = () => {
 
-   const {colorList} = useContext(ColorListContext); 
+   const {colorList, setColorList} = useContext(ColorListContext); 
    const filteredList = useFilter(colorList);
    const orderedList = filteredList
+      .slice(0) 
       .sort((a, b) => b.rgb.blue - a.rgb.blue)
       .sort((a, b) => b.rgb.green - a.rgb.green)
       .sort((a, b) => b.rgb.red - a.rgb.red);
+   
+   const handleRemoveColor = (id: number) => {
+      let updatedList = colorList;
+      updatedList = updatedList.filter(color => color.id !== id);
+      updatedList = updatedList.map((color, index) => ({
+         ...color,
+         id: index,
+      }));
+      setColorList(updatedList);
+   };
       
    return (
       <div>
@@ -19,8 +30,20 @@ const ColorList: FC = () => {
                {orderedList.map(color => {
                   const hexRBG = { "--color": color.hex } as CSSProperties;
                   return (
-                     <li key={color.hex} className='colorContainer'>
-                        <div data-color='blue' style={hexRBG} className='colorRectangle'/>
+                     <li key={color.id} className='colorContainer'>
+                        {!color.isPredefined && (
+                           <button 
+                              onClick={() => handleRemoveColor(color.id)}
+                              type='button'
+                              className='removeButton'
+                           >
+                              X
+                           </button>
+                        )}
+                        <div 
+                           style={hexRBG} 
+                           className='colorRectangle'
+                        />
                         <p className='colorLabel'>{color.hex}</p>
                      </li>)
                   })}
